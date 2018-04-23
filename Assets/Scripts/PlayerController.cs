@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 6.0F;
     public int hp = 10, maxhp = 10;
     private HPController HPC;
-    public GameObject weapon;
+    public WeaponScript weapon;
 
     private SeedSystem seedSystem;
     private Vector3 moveDirection = Vector3.zero;
@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
         seedSystem = GameObject.Find("SeedSystem").GetComponent<SeedSystem>();
         hp = maxhp = seedSystem.maxhp();
         HPC.UpdateHP(hp, maxhp);
+        if(seedSystem.getAttackBuff()) {
+            weapon.Buff();
+        }
     }
 
     void Update()

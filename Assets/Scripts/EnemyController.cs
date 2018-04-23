@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour {
 
     public GameObject player;
 	public float speed = 1;
-	public float timeLastAttacked = 0;
+	protected float timeLastAttacked = 0;
 	public float distanceToAttack = 1.5f;
 	public float coolDownMillis = 1500;
 	public int atk;

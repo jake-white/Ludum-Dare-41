@@ -16,6 +16,9 @@ public class SeedSystem : MonoBehaviour {
 	public int[] inventory_amount;
 	// Use this for initialization
 	void Start () {
+		if(GameObject.FindGameObjectsWithTag("Seed").Length > 1) {
+			Destroy(this.gameObject);
+		}
 		DontDestroyOnLoad(this.gameObject);
 	}
 	
@@ -35,6 +38,10 @@ public class SeedSystem : MonoBehaviour {
 
 	public int[] seedAmounts() {
 		return amounts;
+	}
+
+	public bool getAttackBuff() {
+		return (inventory_amount[2] >= 1);
 	}
 
 	public int maxhp() {

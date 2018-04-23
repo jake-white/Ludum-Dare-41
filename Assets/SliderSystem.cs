@@ -14,12 +14,17 @@ public class SliderSystem : MonoBehaviour {
 	bool valid;
 	// Use this for initialization
 	void Start () {
+	}
+
+	void Awake() {
+		seedSystem = GameObject.Find("SeedSystem").GetComponent<SeedSystem>();
 		for(int i = 0; i < sliders.Length; ++i) {
 			if(!seedSystem.seedUnlocks()[i]) {
 				sliders[i].GetComponent<SliderValue>().Hide();
 			}
 			sliders[i].maxValue = seedSystem.seedAmounts()[i];
 		}
+
 	}
 	
 	// Update is called once per frame
