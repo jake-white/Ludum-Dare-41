@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour {
 
 	}
 
-	void Attack() {
+	protected void Attack() {
 		player.GetComponent<PlayerController>().ReceiveDamage(atk);
 		timeLastAttacked = Time.time * 1000;
 	}

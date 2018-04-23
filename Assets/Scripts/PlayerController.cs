@@ -31,25 +31,31 @@ public class PlayerController : MonoBehaviour
             Die();
         }
         if (Input.GetButtonDown("Attack")) {
-            weapon.GetComponent<Animator>().Play("Stab");
+            if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Right")) {
+                GetComponent<Animator>().Play("Stab_Right");
+            }
+            if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Left")) {
+                GetComponent<Animator>().Play("Stab_Left");
+            }
+            if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Up")) {
+                GetComponent<Animator>().Play("Stab_Up");
+            }
+            if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Down")) {
+                GetComponent<Animator>().Play("Stab_Down");
+            }
         }
         if(Input.GetButtonDown("Up")) {
-            weapon.GetComponent<Animator>().Play("Up");
             GetComponent<Animator>().Play("Up");
         }
         if(Input.GetButtonDown("Down")) {
-            weapon.GetComponent<Animator>().Play("Down");
             GetComponent<Animator>().Play("Down");
         }
         if(Input.GetButtonDown("Left")) {
-            weapon.GetComponent<Animator>().Play("Left");
             GetComponent<Animator>().Play("Left");
         }
         if(Input.GetButtonDown("Right")) {
-            weapon.GetComponent<Animator>().Play("Right");
             GetComponent<Animator>().Play("Right");
-        }
-            
+        }   
         moveDirection = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal")* speed, 0.8f), Mathf.Lerp(0, Input.GetAxis("Vertical")* speed, 0.8f));
     }
 

@@ -26,13 +26,15 @@ public class BoardCreator : MonoBehaviour
 	public Tilemap backgroundmap, wallmap;
     public NavMeshObstacle obstacle;
     public NavMeshSurface surface;
+    public GameObject treasure;
+    public string NextScene;
     
     private GameObject PlayerObject;
     private List<EnemyController> InstantiatedEnemies;
     private TileType[][] tiles;                               // A jagged array of tile types representing the board, like a grid.
     private Room[] rooms;                                     // All the rooms that are created for this board.
     private Corridor[] corridors;                             // All the corridors that connect the rooms.
-    private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles.
+    private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles. 
 
 
     private void Start ()
@@ -107,18 +109,21 @@ public class BoardCreator : MonoBehaviour
                 // Setup the corridor based on the room that was just created.
                 corridors[i].SetupCorridor(rooms[i], corridorLength, roomWidth, roomHeight, columns, rows, false);
             }
-            if (i == (int) (rooms.Length *.5f))
-            {
+
+            int randomEnemySpawn = Random.Range(0, 10);
+            if (i == 1) {
                 Vector3 playerPos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 0);
                 PlayerObject = Instantiate(player, playerPos, Quaternion.identity);
             }
-
-            int randomEnemySpawn = Random.Range(0, 10);
-            if(randomEnemySpawn < 2) {
-
+            else if(i == rooms.Length - 1) {
+                Vector3 treasurePos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 0);
+                GameObject TreasureInstance = Instantiate(treasure, treasurePos, Quaternion.identity);
+                TreasureInstance.GetComponent<CollectTreasure>().SetScene(NextScene);
+            }
+            else if(randomEnemySpawn < 2) {
                 int randomIndex = Random.Range(0, enemies.Length);
-                Vector3 playerPos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 0);
-                InstantiatedEnemies.Add(Instantiate(enemies[randomIndex], playerPos, Quaternion.identity));
+                Vector3 enemyPos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 0);
+                InstantiatedEnemies.Add(Instantiate(enemies[randomIndex], enemyPos, Quaternion.identity));
             }
         }
 

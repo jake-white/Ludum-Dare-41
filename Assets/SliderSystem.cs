@@ -38,7 +38,6 @@ public class SliderSystem : MonoBehaviour {
 		total.text = "" + sum;
 		if(sum > plots) {
 			plantButton.enabled = false;
-			plantButton.GetComponent<GUIText>();
 			total.color = Color.red;
 		}
 		else {

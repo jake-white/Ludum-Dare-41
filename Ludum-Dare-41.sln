@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludum-Dare-41", "Assembly-CSharp.csproj", "{43ED8F19-9834-AF4C-2880-0E1DA91C445B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludum-Dare-41", "Assembly-CSharp-Editor.csproj", "{6CE73552-0F53-D86A-C3DF-49987F4CC3C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43ED8F19-9834-AF4C-2880-0E1DA91C445B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43ED8F19-9834-AF4C-2880-0E1DA91C445B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43ED8F19-9834-AF4C-2880-0E1DA91C445B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43ED8F19-9834-AF4C-2880-0E1DA91C445B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CE73552-0F53-D86A-C3DF-49987F4CC3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CE73552-0F53-D86A-C3DF-49987F4CC3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CE73552-0F53-D86A-C3DF-49987F4CC3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CE73552-0F53-D86A-C3DF-49987F4CC3C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

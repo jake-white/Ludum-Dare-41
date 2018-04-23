@@ -23,7 +23,6 @@ public class EnemyCombat : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
-		Debug.Log(collider.gameObject);
 		if(collider.gameObject.tag == "Weapon") {
 			hp -= collider.gameObject.GetComponent<WeaponScript>().atk;
 		}

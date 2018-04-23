@@ -11,15 +11,16 @@ public class BatController : EnemyController {
 	
 	// Update is called once per frame
     void Update() {
-		Vector3 dir = player.transform.position - transform.position;
-		Debug.Log(player.transform.position + " " + transform.position);
-		dir = dir.normalized;
-		Debug.Log(dir);
-		GetComponent<Rigidbody2D>().AddForce(dir * 2);
+			Vector3 dir = player.transform.position - transform.position;
+			dir = dir.normalized;
+			GetComponent<Rigidbody2D>().AddForce(dir * speed);			
     }
 
-	void Attack() {
-		player.GetComponent<PlayerController>().ReceiveDamage(atk);
-		timeLastAttacked = Time.time * 1000;
+	void OnCollisionEnter2D(Collision2D collider) {
+		if(collider.gameObject.tag == "Player") {
+			if(Time.time * 1000 > timeLastAttacked + coolDownMillis) {
+				Attack();
+			}
+		}
 	}
 }
