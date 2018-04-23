@@ -22,6 +22,7 @@ public class CollectTreasure : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
+		
 		if(collider.gameObject.tag == "Player") {
 			SceneManager.LoadScene(NextScene);
 			collider.gameObject.GetComponent<PlayerController>().collectSeed(seed);
