@@ -64,6 +64,10 @@ public class PlayerController : MonoBehaviour
 		controller.velocity = moveDirection;
     }
 
+    public void collectSeed(int seed) {\
+        seedSystem.unlocks[seed] = true;
+    }
+
     void Die() {
         SceneManager.LoadScene("GameOver");
     }

@@ -28,6 +28,7 @@ public class BoardCreator : MonoBehaviour
     public NavMeshSurface surface;
     public GameObject treasure;
     public string NextScene;
+    public int seed;
     
     private GameObject PlayerObject;
     private List<EnemyController> InstantiatedEnemies;
@@ -119,6 +120,7 @@ public class BoardCreator : MonoBehaviour
                 Vector3 treasurePos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 0);
                 GameObject TreasureInstance = Instantiate(treasure, treasurePos, Quaternion.identity);
                 TreasureInstance.GetComponent<CollectTreasure>().SetScene(NextScene);
+                TreasureInstance.GetComponent<CollectTreasure>().seed = seed;
             }
             else if(randomEnemySpawn < 2) {
                 int randomIndex = Random.Range(0, enemies.Length);
