@@ -11,13 +11,15 @@ public class EnemyController : MonoBehaviour {
 	protected float timeLastAttacked = 0;
 	public float distanceToAttack = 1.5f;
 	public float coolDownMillis = 1500;
+    public float knockbackMod = 100;
 	public int atk;
-	// Use this for initialization
-	void Start () {
+    public BoardCreator creator;
+    // Use this for initialization
+    void Start () {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		Vector2 flatPlayerPos = new Vector2(player.transform.position.x, player.transform.position.y);
 		Vector2 flatEnemyPos = new Vector2(transform.position.x, transform.position.y);
 		float distanceToPlayer = Vector2.Distance(flatEnemyPos, flatPlayerPos);
@@ -36,7 +38,13 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	protected void Attack() {
-		player.GetComponent<PlayerController>().ReceiveDamage(atk);
+        Vector2 knockback = player.transform.position - transform.position;
+        knockback *= knockbackMod;
+        player.GetComponent<PlayerController>().ReceiveDamage(atk, knockback);
 		timeLastAttacked = Time.time * 1000;
 	}
+
+    public void Die() {
+        Destroy(this.gameObject);
+    }
 }

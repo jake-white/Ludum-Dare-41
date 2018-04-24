@@ -19,7 +19,7 @@ public class EnemyCombat : MonoBehaviour {
 
 
 	void Die() {
-		Destroy(this.transform.parent.gameObject);
+        this.transform.parent.gameObject.GetComponent<EnemyController>().Die();
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {

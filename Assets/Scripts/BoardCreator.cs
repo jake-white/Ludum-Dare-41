@@ -20,7 +20,8 @@ public class BoardCreator : MonoBehaviour
     public IntRange corridorLength = new IntRange (6, 10);    // The range of lengths corridors between rooms can have.
     public RuleTile[] floorTiles;                           // An array of floor tile prefabs.
     public RuleTile[] wallTiles;                            // An array of wall tile prefabs.
-    public RuleTile[] outerWallTiles;    
+    public RuleTile[] outerWallTiles;
+    public bool spawnEnemies = true;
     public EnemyController[] enemies;                   // An array of outer wall tile prefabs.
     public GameObject player;
 	public Tilemap backgroundmap, wallmap;
@@ -29,6 +30,7 @@ public class BoardCreator : MonoBehaviour
     public GameObject treasure;
     public string NextScene;
     public int seed;
+    public int enemyLikelihood = 2;
     
     private GameObject PlayerObject;
     private List<EnemyController> InstantiatedEnemies;
@@ -36,6 +38,8 @@ public class BoardCreator : MonoBehaviour
     private Room[] rooms;                                     // All the rooms that are created for this board.
     private Corridor[] corridors;                             // All the corridors that connect the rooms.
     private GameObject boardHolder;                           // GameObject that acts as a container for all other tiles. 
+    private int larvae = 0;
+    private int larvaelimit = 10;
 
 
     private void Start ()
@@ -117,15 +121,17 @@ public class BoardCreator : MonoBehaviour
                 PlayerObject = Instantiate(player, playerPos, Quaternion.identity);
             }
             else if(i == rooms.Length - 1) {
-                Vector3 treasurePos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 0);
+                Vector3 treasurePos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 2);
                 GameObject TreasureInstance = Instantiate(treasure, treasurePos, Quaternion.identity);
                 TreasureInstance.GetComponent<CollectTreasure>().SetScene(NextScene);
                 TreasureInstance.GetComponent<CollectTreasure>().seed = seed;
             }
-            else if(randomEnemySpawn < 2) {
+            else if(randomEnemySpawn < enemyLikelihood && spawnEnemies) {
                 int randomIndex = Random.Range(0, enemies.Length);
-                Vector3 enemyPos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 0);
-                InstantiatedEnemies.Add(Instantiate(enemies[randomIndex], enemyPos, Quaternion.identity));
+                Vector3 enemyPos = new Vector3 (rooms[i].xPos + rooms[i].roomWidth/2, rooms[i].yPos + rooms[i].roomHeight/2, 2);
+                EnemyController enemy = Instantiate(enemies[randomIndex], enemyPos, Quaternion.identity);
+                enemy.creator = this;
+                InstantiatedEnemies.Add(enemy);
             }
         }
 
@@ -290,5 +296,17 @@ public class BoardCreator : MonoBehaviour
             wallmap.SetTile(position, prefabs[randomIndex]);
             Instantiate(obstacle, wallmap.GetCellCenterWorld(position), Quaternion.identity);
         }
+    }
+
+    public void LarvaeMultiply() {
+        larvae++;
+    }
+
+    public bool LarvaeCanMultiply() {
+        return larvae < larvaelimit;
+    }
+
+    public void LarvaeDie() {
+        larvae--;
     }
 }
